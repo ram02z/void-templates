@@ -1,0 +1,12 @@
+# Template file for 'swayr'
+pkgname=swayr
+version=0.6.2
+revision=1
+wrksrc="${pkgname}-v${version}"
+build_style=cargo
+short_desc="Swayr is a window switcher (and more) for sway"
+maintainer="Omar Zeghouani <omarzeghouanii@gmail.com>"
+license="GPL-3.0-or-later"
+homepage="https://git.sr.ht/~tsdh/swayr"
+distfiles="https://git.sr.ht/~tsdh/swayr/archive/v${version}.tar.gz"
+checksum=35a64cf1d27b7ec305d152029f77c23031cbbff4254161e4893c2525d4be4c82

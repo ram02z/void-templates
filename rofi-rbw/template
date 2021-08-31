@@ -1,0 +1,18 @@
+# Template file for 'rofi-rbw'
+pkgname=rofi-rbw
+version=0.4.1
+revision=1
+build_style=python3-pep517
+make_install_target="rofi_rbw-${version}-py3-none-any.whl"
+hostmakedepends="python3-setuptools python3-wheel"
+depends="python3 rbw"
+short_desc="Rofi frontend for Bitwarden"
+maintainer="Omar Zeghouani <omarzeghouanii@gmail.com>"
+license="MIT"
+homepage="https://github.com/fdw/rofi-rbw"
+distfiles="https://github.com/fdw/rofi-rbw/archive/${version}.tar.gz"
+checksum=4fe4d2704980d32ef630d76db4057b66b9a7b26d74de76d030ae6f9d9f4e1a07
+
+post_install() {
+	vlicense LICENSE
+}
