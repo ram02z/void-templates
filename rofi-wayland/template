@@ -1,36 +1,24 @@
 # Template file for 'rofi-wayland'
 pkgname=rofi-wayland
-version=1.6.1
+version=1.7.0
 revision=1
+wrksrc=rofi-${version}
+create_wrksrc=yes
 build_style=meson
 configure_args="-Dwayland=enabled"
-hostmakedepends="autoconf automake flex glib-devel pkg-config wayland-devel wayland-protocols"
+hostmakedepends="ninja flex bison glib-devel pkg-config wayland-devel wayland-protocols"
 makedepends="check-devel libXinerama-devel librsvg-devel
  libxkbcommon-devel pango-devel startup-notification-devel
- xcb-util-wm-devel xcb-util-xrm-devel git"
+ xcb-util-wm-devel xcb-util-xrm-devel xcb-util-cursor-devel"
 short_desc="Window switcher, run dialog and dmenu replacement"
-maintainer="Dave Davenport <qball@gmpclient.org>"
+maintainer="Omar Zeghouani <omarzeghouanii@gmail.com>"
 license="MIT"
 homepage="https://github.com/lbonn/rofi"
-# distfiles="https://github.com/lbonn/rofi/archive/${version}-wayland.tar.gz
-#  https://github.com/sardemff7/libnkutils/archive/master.tar.gz
-#  https://github.com/sardemff7/libgwater/archive/master.tar.gz"
-# checksum="10879472616da49cfa00b25d3c36652c4bfd945cdf1fb0d6032e6e28b88f292d
-#  c4127d0b91283c2fed5dfccfa01ef6e505fe78bfb89fd15cea0c38de8df0990a
-#  9cc3f06f2b9a4d094d86b54521374f2d4507e22dcffc16edf0842a6dcb94fed9"
-conflicts="rofi"
+distfiles="https://github.com/ram02z/rofi/releases/download/${version}/rofi-${version}.tar.gz"
+checksum=01a3856eed14cf04a16bc2300c8b050ea0e9ddcfcd3238f54cc6cb2dc9b3c394
+# replaces="rofi>=0"
+make_check=no
 
-do_fetch() {
-	git clone https://github.com/lbonn/rofi.git ${build_wrksrc}
-	cd ${build_wrksrc}
-	git submodule update --init --recursive
-}
-
-rofi-devel_package() {
-	short_desc+=" - development files"
-	depends="libglib-devel cairo-devel"
-	pkg_install() {
-		vmove usr/include
-		vmove usr/lib/pkgconfig
-	}
+post_install() {
+	vlicense COPYING
 }
