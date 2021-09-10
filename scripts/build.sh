@@ -12,10 +12,10 @@ git diff-tree -r --no-renames --name-only --diff-filter=AM \
 	tee /tmp/templates |
 	sed "s/^/  /" >&2
 
-PKGS=$(./void-packages/xbps-src sort-dependencies $(cat /tmp/templates))
+PKGS=$("$base/void-packages/xbps-src" sort-dependencies $(cat /tmp/templates))
 
 for pkg in ${PKGS}; do
-	./void-packages/xbps-src -j$(nproc) pkg "$pkg"
+	"$base/void-packages/xbps-src" -j$(nproc) pkg "$pkg"
 	[ $? -eq 1 ] && exit 1
 done
 

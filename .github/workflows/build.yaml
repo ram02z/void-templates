@@ -44,12 +44,6 @@ jobs:
         with:
           fetch-depth: 1
 
-      - name: Prepare xbps-src
-        run: bash scripts/prepare.sh
-
-      - name: Build and check packages
-        run: bash scripts/build.sh
-
       - run: 'echo "$PRIVATE_PEM" > private.pem'
         shell: bash
         env:
@@ -59,3 +53,9 @@ jobs:
         shell: bash
         env:
           PRIVATE_PEM_PUB: ${{ secrets.PRIVATE_PEM_PUB }}
+
+      - name: Prepare xbps-src
+        run: bash scripts/prepare.sh
+
+      - name: Build and check packages
+        run: bash scripts/build.sh
