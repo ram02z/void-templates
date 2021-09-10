@@ -2,18 +2,12 @@
 #
 # build.sh
 
-
-tip="$(git rev-list -1 --parents HEAD)"
-
-base="$(echo $tip | cut -d " " -f 2)"
-tip="$(echo $tip | cut -d " " -f 1)"
-
-echo "$base $tip" >/tmp/revisions
+base=$(git rev-parse --show-toplevel)
 
 /bin/echo -e '\x1b[32mChanged packages:\x1b[0m'
 git diff-tree -r --no-renames --name-only --diff-filter=AM \
-	"$tip" "$base" \
-	-- 'srcpkgs/*/template' |
+	$(git rev-list -1 --parents HEAD) \
+	-- "$base/srcpkgs/*/template" |
 	cut -d/ -f 2 |
 	tee /tmp/templates |
 	sed "s/^/  /" >&2
