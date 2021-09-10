@@ -1,0 +1,66 @@
+name: Build working templates
+
+on:
+  push:
+    branches:
+      - master
+    paths:
+      - 'srcpkgs/**'
+
+jobs:
+  build:
+    name: Build
+    runs-on: ubuntu-18.04
+
+    container:
+      image: 'ghcr.io/void-linux/xbps-src-masterdir:20210313rc01-${{ matrix.config.bootstrap }}'
+      env:
+        PATH: '/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/sbin:/usr/local/bin:/tmp/bin'
+        ARCH: '${{ matrix.config.arch }}'
+        BOOTSTRAP: '${{ matrix.config.bootstrap }}'
+
+    strategy:
+      fail-fast: false
+      matrix:
+        config:
+          - { arch: x86_64, bootstrap: x86_64 }
+          # - { arch: i686, bootstrap: i686, test: 1 }
+          # - { arch: aarch64, bootstrap: x86_64, test: 0 }
+          # - { arch: armv7l, bootstrap: x86_64, test: 0 }
+          - { arch: x86_64-musl, bootstrap: x86_64-musl }
+          # - { arch: armv6l-musl, bootstrap: x86_64-musl, test: 0 }
+          # - { arch: aarch64-musl, bootstrap: x86_64-musl, test: 0 }
+
+    steps:
+      - name: Prepare container
+        run: |
+          # Sync and upgrade once, assume error comes from xbps update
+          xbps-install -Syu || xbps-install -yu xbps
+          # Upgrade again (in case there was a xbps update)
+          xbps-install -yu
+          # Install git and other dependencies for the scripts
+          xbps-install -y git wget curl make jq tar
+      - uses: actions/checkout@v1
+        with:
+          fetch-depth: 1
+
+      - name: Prepare xbps-src
+        run: scripts/prepare.sh
+
+      - name: Build and check packages
+        run: |
+          (
+          here="$(pwd)"
+          cd /
+          "$here/scripts/build.sh" "$BOOTSTRAP" "$ARCH" "$TEST"
+          )
+
+      - run: 'echo "$PRIVATE_PEM" > private.pem'
+        shell: bash
+        env:
+          PRIVATE_PEM: ${{ secrets.PRIVATE_PEM }}
+
+      - run: 'echo "$PRIVATE_PEM_PUB" > private.pem.pub'
+        shell: bash
+        env:
+          PRIVATE_PEM_PUB: ${{ secrets.PRIVATE_PEM_PUB }}
