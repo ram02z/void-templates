@@ -12,7 +12,7 @@ git diff-tree -r --no-renames --name-only --diff-filter=AM \
 	tee /tmp/templates |
 	sed "s/^/  /" >&2
 
-echo $PWD
+echo $PWD $base
 
 PKGS=$("$base/void-packages/xbps-src" sort-dependencies $(cat /tmp/templates))
 
