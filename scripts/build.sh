@@ -5,8 +5,8 @@
 
 tip="$(git rev-list -1 --parents HEAD)"
 
-base="$($tip | cut -d " " -f 2)"
-tip="$($tip | cut -d " " -f 1)"
+base="$(echo $tip | cut -d " " -f 2)"
+tip="$(echo $tip | cut -d " " -f 1)"
 
 echo "$base $tip" >/tmp/revisions
 
