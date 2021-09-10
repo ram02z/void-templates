@@ -40,9 +40,8 @@ jobs:
           xbps-install -yu
           # Install git and other dependencies for the scripts
           xbps-install -y git wget curl make jq tar
-      - uses: actions/checkout@v1
-        with:
-          fetch-depth: 1
+
+      - uses: actions/checkout@v2
 
       - run: 'echo "$PRIVATE_PEM" > private.pem'
         shell: bash
