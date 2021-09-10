@@ -45,15 +45,10 @@ jobs:
           fetch-depth: 1
 
       - name: Prepare xbps-src
-        run: scripts/prepare.sh
+        run: bash scripts/prepare.sh
 
       - name: Build and check packages
-        run: |
-          (
-          here="$(pwd)"
-          cd /
-          "$here/scripts/build.sh" "$BOOTSTRAP" "$ARCH" "$TEST"
-          )
+        run: bash scripts/build.sh
 
       - run: 'echo "$PRIVATE_PEM" > private.pem'
         shell: bash
