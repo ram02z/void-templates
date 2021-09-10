@@ -55,11 +55,11 @@ jobs:
         env:
           PRIVATE_PEM_PUB: ${{ secrets.PRIVATE_PEM_PUB }}
 
-      - name: Export changed templates
-        run: bash scripts/changed.sh
-
       - name: Prepare xbps-src
         run: bash scripts/prepare.sh
+
+      - name: Export changed templates
+        run: bash scripts/changed.sh
 
       - name: Build and check packages
         run: bash scripts/build.sh
