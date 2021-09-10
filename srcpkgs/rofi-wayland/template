@@ -16,7 +16,7 @@ license="MIT"
 homepage="https://github.com/lbonn/rofi"
 distfiles="https://github.com/ram02z/rofi/releases/download/${version}/rofi-${version}.tar.gz"
 checksum=01a3856eed14cf04a16bc2300c8b050ea0e9ddcfcd3238f54cc6cb2dc9b3c394
-# replaces="rofi>=0"
+replaces="rofi>=0"
 make_check=no
 
 post_install() {
