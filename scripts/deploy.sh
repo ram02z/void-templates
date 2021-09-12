@@ -67,6 +67,7 @@ cp -Rf $HOME/build/$BUILD_DIR/*.xbps $LIBC
 ls -la $LIBC
 
 # Sign packages
+xbps-rindex --add ./$LIBC/*.xbps
 xbps-rindex --privkey private.pem --sign --signedby "Omar Zeghouani" ./$LIBC
 xbps-rindex --privkey private.pem --sign-pkg ./$LIBC/*.xbps
 
