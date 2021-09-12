@@ -9,6 +9,7 @@ set -e
 REPONAME="void-templates"
 OWNER="ram02z"
 GHIO="${OWNER}.github.io"
+URL="${GHIO}/${REPONAME}"
 TARGET_BRANCH="gh-pages"
 EMAIL="omarzeghouanii@gmail.com"
 BUILD_DIR="void-packages/hostdir/binpkgs"
@@ -99,7 +100,34 @@ cat << EOF >> index.html
 </html>
 EOF
 
-# TODO: generate index for packages
+# Generate index.html for packages
+cat << EOF > $LIBC/index.html
+<html>
+<head><title>Index of /$REPONAME/$LIBC</title></head>
+<body>
+<h1>Index of /$REPONAME/$LIBC</h1>
+<hr><pre><a href="$URL/$LIBC/">../</a>
+EOF
+
+for f in $LIBC/*;do
+  file=$(basename $f)
+  if [ "$file" == "index.html" ]; then
+      echo "ignored: $file"
+      continue
+  fi
+
+  size=$(du -s $f | awk '{print $1;}')
+  s=$(stat -c %y $f)
+  stat=${s%%.*}
+  if [ -f "$f" ]; then
+    printf '<a href="%s%s%s">%-40s%35s%20s\n' "$URL" "$LIBC/" "$file" "$file</a>" "$stat" "$size" >> $LIBC/index.html
+  fi
+done
+
+cat << EOF >> $LIBC/index.html
+</pre><hr></body>
+</html>
+EOF
 
 COMMIT_MESSAGE="$GITHUB_ACTOR published a site update"
 
