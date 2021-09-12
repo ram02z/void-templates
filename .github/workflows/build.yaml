@@ -63,3 +63,6 @@ jobs:
 
       - name: Build and check packages
         run: bash scripts/build.sh
+
+      - name: Sign and deploy to GH pages
+        run: bash scripts/deploy.sh
