@@ -101,7 +101,7 @@ cat << EOF > $LIBC/index.html
 <head><title>Index of /$REPONAME/$LIBC</title></head>
 <body>
 <h1>Index of /$REPONAME/$LIBC</h1>
-<hr><pre><a href="$URL/$LIBC/">../</a>
+<hr><pre><a href="$URL/">../</a>
 EOF
 
 for f in $LIBC/*;do
