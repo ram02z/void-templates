@@ -31,9 +31,9 @@ git config --global user.name "$GITHUB_ACTOR"
 git config --global user.email "$INPUT_EMAIL"
 
 # Sleep to ensure that latest copy is cloned
-if [ "$LIBC" == "musl" ]; then
-    sleep 120
-fi
+# if [ "$LIBC" == "musl" ]; then
+#     sleep 120
+# fi
 
 if [ -z "$(git ls-remote --heads https://${GITHUB_ACTOR}:${GITHUB_TOKEN}@github.com/${GITHUB_REPOSITORY}.git ${TARGET_BRANCH})" ]; then
   echo "Create branch '${TARGET_BRANCH}'"

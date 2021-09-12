@@ -26,5 +26,6 @@ if [ "$_features" ]; then
 fi
 
 post_install() {
+
 	vlicense LICENSE.md
 }

@@ -21,6 +21,7 @@ jobs:
 
     strategy:
       fail-fast: false
+      max-parallel: 1
       matrix:
         config:
           - { arch: x86_64, bootstrap: x86_64 }
