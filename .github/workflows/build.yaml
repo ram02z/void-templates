@@ -45,16 +45,6 @@ jobs:
         with:
           fetch-depth: 0
 
-      - run: 'echo "$PRIVATE_PEM" > private.pem'
-        shell: bash
-        env:
-          PRIVATE_PEM: ${{ secrets.PRIVATE_PEM }}
-
-      - run: 'echo "$PRIVATE_PEM_PUB" > private.pem.pub'
-        shell: bash
-        env:
-          PRIVATE_PEM_PUB: ${{ secrets.PRIVATE_PEM_PUB }}
-
       - name: Prepare xbps-src
         run: bash scripts/prepare.sh
 
@@ -67,4 +57,6 @@ jobs:
       - name: Sign and deploy to GH pages
         run: bash scripts/deploy.sh
         env:
+          PRIVATE_PEM: ${{ secrets.PRIVATE_PEM }}
+          PRIVATE_PEM_PUB: ${{ secrets.PRIVATE_PEM_PUB }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
