@@ -66,3 +66,5 @@ jobs:
 
       - name: Sign and deploy to GH pages
         run: bash scripts/deploy.sh
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
