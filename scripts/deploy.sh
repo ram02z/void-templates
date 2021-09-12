@@ -9,7 +9,7 @@ set -e
 REPONAME="void-templates"
 OWNER="ram02z"
 GHIO="${OWNER}.github.io"
-URL="${GHIO}/${REPONAME}"
+URL="https://${GHIO}/${REPONAME}"
 TARGET_BRANCH="gh-pages"
 EMAIL="omarzeghouanii@gmail.com"
 BUILD_DIR="void-packages/hostdir/binpkgs"
@@ -81,7 +81,7 @@ cat << EOF > index.html
 <head><title>Index of /$REPONAME</title></head>
 <body>
 <h1>Index of /$REPONAME</h1>
-<hr><pre><a href="https://ram02z.github.io">../</a>
+<hr><pre><a href="https://$GHIO">../</a>
 EOF
 
 for d in */; do
@@ -120,7 +120,7 @@ for f in $LIBC/*;do
   s=$(stat -c %y $f)
   stat=${s%%.*}
   if [ -f "$f" ]; then
-    printf '<a href="%s%s%s">%-40s%35s%20s\n' "$URL" "$LIBC/" "$file" "$file</a>" "$stat" "$size" >> $LIBC/index.html
+    printf '<a href="%s%s%s">%-40s%35s%20s\n' "$URL/" "$LIBC/" "$file" "$file</a>" "$stat" "$size" >> $LIBC/index.html
   fi
 done
 

@@ -20,6 +20,7 @@ post_build() {
 }
 
 post_install() {
+
 	vcompletion rbw.bash bash
 	vcompletion rbw.fish fish
 	vcompletion rbw.zsh  zsh
