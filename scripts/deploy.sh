@@ -64,9 +64,11 @@ find $LIBC -name "*.sig" -maxdepth 1 -delete
 find $LIBC -name "$ARCH-repodata" -maxdepth 1 -delete
 cp -Rf $HOME/build/$BUILD_DIR/*.xbps $LIBC
 
+ls -la $LIBC
+
 # Sign packages
-xbps-rindex --privkey private.pem --sign --signedby "Omar Zeghouani" $LIBC
-xbps-rindex --privkey private.pem --sign-pkg $LIBC/*.xbps
+xbps-rindex --privkey private.pem --sign --signedby "Omar Zeghouani" ./$LIBC
+xbps-rindex --privkey private.pem --sign-pkg ./$LIBC/*.xbps
 
 # Generate homepage
 cat << EOF > index.html
