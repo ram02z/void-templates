@@ -1,0 +1,12 @@
+# Template file for 'battop'
+pkgname=battop
+version=0.2.5
+revision=1
+wrksrc="rust-battop-${version}"
+build_style=cargo
+short_desc="Interactive battery viewer"
+maintainer="Omar Zeghouani <omarzeghouanii@gmail.com>"
+license="Apache-2.0"
+homepage="https://github.com/ram02z/rust-battop"
+distfiles="https://github.com/ram02z/rust-battop/archive/v${version}.tar.gz"
+checksum=bfd9a308a7786d15fcd11d80977b6a062af440b5144755163ae0e506ed0dab24
