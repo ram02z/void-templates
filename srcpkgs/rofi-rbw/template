@@ -14,6 +14,5 @@ distfiles="https://github.com/fdw/rofi-rbw/archive/${version}.tar.gz"
 checksum=4fe4d2704980d32ef630d76db4057b66b9a7b26d74de76d030ae6f9d9f4e1a07
 
 post_install() {
-
 	vlicense LICENSE
 }
