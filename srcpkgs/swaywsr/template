@@ -1,6 +1,6 @@
 # Template file for 'swaywsr'
 pkgname=swaywsr
-version=1.0
+version=1.1.0
 revision=1
 wrksrc="${pkgname}-master"
 build_style=cargo
