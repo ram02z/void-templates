@@ -28,7 +28,7 @@ cp -R $BUILD_DIR/* $HOME/build/$BUILD_DIR/
 mkdir -p $HOME/branch/
 cd $HOME/branch/
 git config --global user.name "$GITHUB_ACTOR"
-git config --global user.email "$INPUT_EMAIL"
+git config --global user.email "$EMAIL"
 
 if [ -z "$(git ls-remote --heads https://${GITHUB_ACTOR}:${GITHUB_TOKEN}@github.com/${GITHUB_REPOSITORY}.git ${TARGET_BRANCH})" ]; then
   echo "Create branch '${TARGET_BRANCH}'"
