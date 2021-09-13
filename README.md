@@ -9,3 +9,4 @@ A collection of templates for Void Linux, to be used with xbps-src.
 | rofi-rbw            | PR in progress      |
 | rofi-wayland        | Waiting on upstream |
 | swayr               | PR in progress      |
+| swaywsr             | Waiting on upstream |

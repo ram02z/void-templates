@@ -1,0 +1,16 @@
+# Template file for 'swaywsr'
+pkgname=swaywsr
+version=1.0
+revision=1
+wrksrc="${pkgname}-master"
+build_style=cargo
+short_desc="Sway workspace renamer"
+maintainer="Omar Zeghouani <omarzeghouanii@gmail.com>"
+license="MIT"
+homepage="https://github.com/pedroscaff/swaywsr"
+distfiles="https://github.com/pedroscaff/swaywsr/archive/master.tar.gz"
+checksum=1343471a84d8e6ff85d3ca28c6a76b327f8a332b7c2d2bc35d78e49b391a7bc8
+
+post_install() {
+	vlicense LICENSE
+}
