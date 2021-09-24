@@ -3,6 +3,7 @@
 tip=$(git rev-parse HEAD)
 base=$(git rev-parse HEAD~)
 
+/bin/echo -e '\x1b[32mRemoved packages:\x1b[0m'
 git diff-tree -r --no-renames --name-only --diff-filter=D \
 	"$base" "$tip" \
 	-- "srcpkgs/*/template" |
