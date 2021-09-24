@@ -20,10 +20,6 @@ esac
 
 echo "### Started deploy to $GITHUB_REPOSITORY/$TARGET_BRANCH"
 
-# Prepare build_dir
-mkdir -p $HOME/build/$BUILD_DIR
-cp -R $BUILD_DIR/* $HOME/build/$BUILD_DIR/
-
 # Create or clone the gh-pages repo
 mkdir -p $HOME/branch/
 cd $HOME/branch/
@@ -46,19 +42,33 @@ else
   git clone --quiet --branch=$TARGET_BRANCH https://${GITHUB_ACTOR}:${GITHUB_TOKEN}@github.com/${GITHUB_REPOSITORY}.git $TARGET_BRANCH > /dev/null
 fi
 
-# Delete old packages
+# Delete old and removed packages
+CPKGS=$(cat /tmp/templates)
+if [ -n "$CPKGS" ]; then
+	# Prepare build_dir
+	mkdir -p $HOME/build/$BUILD_DIR
+	cp -R $BUILD_DIR/* $HOME/build/$BUILD_DIR/
+fi
+
 cd $TARGET_BRANCH
 find . -maxdepth 1 -type f -delete
 mkdir -p $LIBC
-PKGS=$(cat /tmp/templates)
-for pkg in ${PKGS}; do
+
+for pkg in ${CPKGS}; do
+	find $LIBC -name "$pkg*" -maxdepth 1 -delete
+done
+
+RPKGS=$(cat /tmp/removed)
+for pkg in ${RPKGS}; do
 	find $LIBC -name "$pkg*" -maxdepth 1 -delete
 done
 
 # Delete old signatures and repodata
 find $LIBC -name "*.sig" -maxdepth 1 -delete
 find $LIBC -name "$ARCH-repodata" -maxdepth 1 -delete
-cp -Rf $HOME/build/$BUILD_DIR/*.xbps $LIBC
+if [ -n "$CPKGS" ]; then
+	cp -Rf $HOME/build/$BUILD_DIR/*.xbps $LIBC
+fi
 
 ls -la $LIBC
 
@@ -66,9 +76,9 @@ ls -la $LIBC
 echo "$PRIVATE_PEM" > $HOME/private.pem
 echo "$PRIVATE_PEM_PUB" > $HOME/private.pem.pub
 
-xbps-rindex --add ./$LIBC/*.xbps
-xbps-rindex --privkey $HOME/private.pem --sign --signedby "Omar Zeghouani" ./$LIBC
-xbps-rindex --privkey $HOME/private.pem --sign-pkg ./$LIBC/*.xbps
+xbps-rindex --add $LIBC/*.xbps
+xbps-rindex --privkey $HOME/private.pem --sign --signedby "Omar Zeghouani" $LIBC
+xbps-rindex --privkey $HOME/private.pem --sign-pkg $LIBC/*.xbps
 
 # Generate homepage
 cat << EOF > index.html
