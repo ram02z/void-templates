@@ -11,7 +11,6 @@ A collection of templates for Void Linux, to be used with xbps-src.
 | swayr               | PR in progress      |
 | swaywsr             | Waiting on upstream |
 | battop              | Applied patches     |
-| tlp                 | Waiting on upstream |
 
 To add repository:
 
