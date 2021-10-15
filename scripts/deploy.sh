@@ -20,6 +20,13 @@ esac
 
 echo "### Started deploy to $GITHUB_REPOSITORY/$TARGET_BRANCH"
 
+CPKGS=$(cat /tmp/templates)
+if [ -n "$CPKGS" ]; then
+	# Prepare build_dir
+	mkdir -p $HOME/build/$BUILD_DIR
+	cp -R $BUILD_DIR/* $HOME/build/$BUILD_DIR/
+fi
+
 # Create or clone the gh-pages repo
 mkdir -p $HOME/branch/
 cd $HOME/branch/
@@ -43,13 +50,6 @@ else
 fi
 
 # Delete old and removed packages
-CPKGS=$(cat /tmp/templates)
-if [ -n "$CPKGS" ]; then
-	# Prepare build_dir
-	mkdir -p $HOME/build/$BUILD_DIR
-	cp -R $BUILD_DIR/* $HOME/build/$BUILD_DIR/
-fi
-
 cd $TARGET_BRANCH
 find . -maxdepth 1 -type f -delete
 mkdir -p $LIBC

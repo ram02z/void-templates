@@ -1,8 +1,10 @@
-#!/bin/bash
+#enabled!/bin/bash
 #
 # prepare.sh
 
 dir=$(pwd)/void-packages
+
+/bin/echo -e '\x1b[32mvoid-packages location: '"$dir"'\x1b[0m'
 
 if [ ! -d $dir ] ; then
   git clone --depth 1 git://github.com/void-linux/void-packages.git $dir
