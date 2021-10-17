@@ -5,23 +5,22 @@ revision=1
 build_style=cargo
 configure_args="--no-default-features"
 hostmakedepends="pkg-config python3"
-makedepends="openssl-devel ncurses-devel $(vopt_if libxcb libxcb-devel)
+makedepends="openssl-devel $(vopt_if libxcb libxcb-devel)
 $(vopt_if dbus dbus-devel) $(vopt_if alsa alsa-lib-devel)
 $(vopt_if pulseaudio pulseaudio-devel)"
-short_desc="Ncurses Spotify client"
+short_desc="Cross-platform ncurses Spotify client"
 maintainer="Omar Zeghouani <omarzeghouanii@gmail.com>"
 license="BSD-2-Clause"
 homepage="https://github.com/hrkfdn/ncspot"
 distfiles="https://github.com/hrkfdn/ncspot/archive/v${version}.tar.gz"
 checksum=81655d9fab4903c6ac22321f1a6801aaedfbd88d4f5f768ae8303104fa904a53
-nocross="ncurses exec format error"
 
 build_options="libxcb dbus alsa pulseaudio notify cover"
 build_options_default="libxcb dbus alsa pulseaudio notify"
 desc_option_libxcb="Enable support for X clipboard access"
 desc_option_cover="Enable support for cover art"
 
-_features="cursive/pancurses-backend"
+_features="cursive/termion-backend"
 _features+="$(vopt_if libxcb ',share_clipboard,share_selection')"
 _features+="$(vopt_if dbus ',mpris')"
 _features+="$(vopt_if alsa ',alsa_backend')"
@@ -29,9 +28,7 @@ _features+="$(vopt_if pulseaudio ',pulseaudio_backend')"
 _features+="$(vopt_if notify ',notify')"
 _features+="$(vopt_if cover ',cover')"
 
-if [ "$_features" ]; then
-	configure_args+=" --features $_features"
-fi
+configure_args+=" --features $_features"
 
 post_install() {
 	vlicense LICENSE
