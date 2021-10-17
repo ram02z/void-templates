@@ -22,5 +22,5 @@ git diff-tree -r --no-renames --name-only --diff-filter=AM \
 PKGS=$(cat /tmp/templates)
 for pkg in ${PKGS}; do
 	mkdir -p "void-packages/srcpkgs/$pkg" && 
-	cp "srcpkgs/$pkg/template" "void-packages/srcpkgs/$pkg/template"
+	cp -r "srcpkgs/$pkg/." "void-packages/srcpkgs/$pkg/"
 done
