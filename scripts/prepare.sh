@@ -1,4 +1,4 @@
-#enabled!/bin/bash
+#!/bin/bash
 #
 # prepare.sh
 
