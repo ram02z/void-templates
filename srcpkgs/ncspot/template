@@ -1,19 +1,19 @@
 # Template file for 'ncspot'
 pkgname=ncspot
-version=0.9.0
+version=0.9.4
 revision=1
 build_style=cargo
 configure_args="--no-default-features"
 hostmakedepends="pkg-config python3"
 makedepends="openssl-devel $(vopt_if libxcb libxcb-devel)
-$(vopt_if dbus dbus-devel) $(vopt_if alsa alsa-lib-devel)
-$(vopt_if pulseaudio pulseaudio-devel)"
+ $(vopt_if dbus dbus-devel) $(vopt_if alsa alsa-lib-devel)
+ $(vopt_if pulseaudio pulseaudio-devel)"
 short_desc="Cross-platform ncurses Spotify client"
 maintainer="Omar Zeghouani <omarzeghouanii@gmail.com>"
 license="BSD-2-Clause"
 homepage="https://github.com/hrkfdn/ncspot"
 distfiles="https://github.com/hrkfdn/ncspot/archive/v${version}.tar.gz"
-checksum=81655d9fab4903c6ac22321f1a6801aaedfbd88d4f5f768ae8303104fa904a53
+checksum=17c300194de48bba1aa75801ede1d9a3a6e3be473145d8663e3f4360b41361e3
 
 build_options="libxcb dbus alsa pulseaudio notify cover"
 build_options_default="libxcb dbus alsa pulseaudio notify"
