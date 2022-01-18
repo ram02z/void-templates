@@ -1,6 +1,6 @@
 # Template file for 'ncspot'
 pkgname=ncspot
-version=0.9.4
+version=0.9.5
 revision=1
 build_style=cargo
 configure_args="--no-default-features"
@@ -13,7 +13,7 @@ maintainer="Omar Zeghouani <omarzeghouanii@gmail.com>"
 license="BSD-2-Clause"
 homepage="https://github.com/hrkfdn/ncspot"
 distfiles="https://github.com/hrkfdn/ncspot/archive/v${version}.tar.gz"
-checksum=17c300194de48bba1aa75801ede1d9a3a6e3be473145d8663e3f4360b41361e3
+checksum=aff3fb952834dd657cf4a2dbcf6171c620273d6b8b6372cefcbe257c230f17f5
 
 build_options="libxcb dbus alsa pulseaudio notify cover"
 build_options_default="libxcb dbus alsa pulseaudio notify"
