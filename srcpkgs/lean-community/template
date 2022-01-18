@@ -1,0 +1,17 @@
+# Template file for 'lean-community'
+pkgname=lean-community
+version=3.38.0
+revision=1
+wrksrc="lean-$version"
+build_wrksrc=src
+build_style=cmake
+make_cmd=ninja
+hostmakedepends="cmake ninja gmp"
+makedepends="gmp-devel"
+short_desc="Lean Theorem Prover, maintained by the Lean community"
+maintainer="Omar Zeghouani <omarzeghouanii@gmail.com>"
+license="Apache-2.0"
+homepage="https://github.com/leanprover-community/lean"
+distfiles="https://github.com/leanprover-community/lean/archive/v${version}.tar.gz"
+checksum=3b6fdfc2847a5553511943c88e166b3c14cafb78fecab33eb5acc89b9c2952a1
+nocross=yes
