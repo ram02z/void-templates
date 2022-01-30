@@ -1,0 +1,14 @@
+# Template file for 'cppman'
+pkgname=cppman
+version=0.5.1
+revision=1
+build_style=python3-module
+hostmakedepends="python3-setuptools"
+depends="python python3-BeautifulSoup4 python3-html5lib"
+checkdepends=$depends
+short_desc="C++ 98/11/14 manual pages for Linux"
+maintainer="Omar Zeghouani <omarzeghouanii@gmail.com>"
+license="GPL-3.0-or-later"
+homepage="https://github.com/aitjcize/cppman"
+distfiles="https://github.com/aitjcize/cppman/archive/${version}.tar.gz"
+checksum=1da27dda46e702063cb9635eac7bd6ca9f73adfab6f015c2659e511fb0f2bcf8
