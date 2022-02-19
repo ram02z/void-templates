@@ -1,6 +1,6 @@
 # Template file for 'swayr'
 pkgname=swayr
-version=0.11.2
+version=0.13.0
 revision=1
 wrksrc="${pkgname}-v${version}"
 build_style=cargo
@@ -9,4 +9,4 @@ maintainer="Omar Zeghouani <omarzeghouanii@gmail.com>"
 license="GPL-3.0-or-later"
 homepage="https://git.sr.ht/~tsdh/swayr"
 distfiles="https://git.sr.ht/~tsdh/swayr/archive/v${version}.tar.gz"
-checksum=7bf02f0de70e0f9695a13c22a1774f64d44802194ffcf0e8a65bf637586ea402
+checksum=bff14714705d7ec7d8fbd435b3b014776b37cfbb9d80cc242640a092503adc4a
