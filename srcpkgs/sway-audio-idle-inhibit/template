@@ -1,14 +1,14 @@
 # Template file for 'sway-audio-idle-inhibit'
 pkgname=sway-audio-idle-inhibit
-version=0.0.0
+version=0.1.1
+wrksrc="SwayAudioIdleInhibit-${version}"
 revision=1
-wrksrc="SwayAudioIdleInhibit-main"
 build_style="meson"
-hostmakedepends="ninja pkg-config"
+hostmakedepends="ninja pkg-config wayland-devel"
 makedepends="wayland-protocols wayland-devel pulseaudio-devel"
 short_desc="Prevent swayidle from sleeping when audio is playing"
 maintainer="Omar Zeghouani <omarzeghouanii@gmail.com>"
 license="GPL-3.0-or-later"
 homepage="https://github.com/ErikReider/SwayAudioIdleInhibit"
-distfiles="https://github.com/ErikReider/SwayAudioIdleInhibit/archive/refs/heads/main.tar.gz"
-checksum=f9384e9e692ac33ae64f266fe00ceed33da3558ab518f4acb35b47894e2002b5
+distfiles="https://github.com/ErikReider/SwayAudioIdleInhibit/archive/refs/tags/v${version}.tar.gz"
+checksum=f6505261648f00deec27958db863237619e31541b67e67d5fa8631ed030fe524
