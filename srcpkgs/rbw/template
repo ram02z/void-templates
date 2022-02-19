@@ -1,6 +1,6 @@
 # Template file for 'rbw'
 pkgname=rbw
-version=1.4.1
+version=1.4.3
 revision=1
 build_style="cargo"
 build_helper="qemu"
@@ -11,7 +11,7 @@ license="MIT"
 homepage="https://git.tozt.net/rbw"
 changelog="https://git.tozt.net/rbw/plain/CHANGELOG.md"
 distfiles="https://git.tozt.net/rbw/snapshot/rbw-${version}.tar.gz"
-checksum=70c55c1341f4181f8974f99ec24ee1caf918487135cfa578566d9e6c44eb47b0
+checksum=2738aa6e868bf16292fcad9c9a45c60fe310d2303d06aea7875788bacda9b15b
 
 post_build() {
 	for shell in bash fish zsh; do
