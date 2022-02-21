@@ -12,7 +12,6 @@ A collection of templates for Void Linux, to be used with xbps-src.
 | battop              | Applied patches     |
 | lean-community      | PR in progress      |
 | sway-audio-idle-inhibit | PR in progress  | 
-| cppman              | PR in progress      |
 
 To add repository:
 
