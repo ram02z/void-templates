@@ -1,0 +1,93 @@
+# Template file for 'lua-language-server'
+pkgname=lua-language-server
+version=2.6.5
+revision=2
+create_wrksrc="yes"
+hostmakedepends="ninja"
+depends="lua"
+short_desc="Lua Language Server coded by Lua"
+maintainer="Gabriel Sanches <gabriel@gsr.dev>"
+license="MIT"
+homepage="https://github.com/sumneko/lua-language-server"
+_emmy_lua_code_style_commit="ddc8c39b247f5ec1eb82398c9c73d5bd9c76bc74"
+_bee_lua_commit="226b4f55938dff7e3424437aac77e1b0932d98c2"
+_love_api_commit="6532c3890915ceb265afc64a33ca1b838a28acbe"
+_lovr_docs_commit="460b954143b298a580ef3f7bffff2fc621545f3f"
+_lpeglabel_commit="ed183860289664af0f3727307653c9bf2bccdc80"
+_luamake_commit="843262572a2765ebe187573e32c4f8f22952c2c0"
+_luamake_bee_lua_commit="6d50b51196f13ba9acc1cb2aa5a17ddb96519094"
+distfiles="https://github.com/sumneko/$pkgname/archive/refs/tags/$version.tar.gz
+ https://github.com/CppCXY/EmmyLuaCodeStyle/archive/$_emmy_lua_code_style_commit.tar.gz
+ https://github.com/actboy168/bee.lua/archive/$_bee_lua_commit.tar.gz
+ https://github.com/love2d-community/love-api/archive/$_love_api_commit.tar.gz
+ https://github.com/bjornbytes/lovr-docs/archive/$_lovr_docs_commit.tar.gz
+ https://github.com/sqmedeiros/lpeglabel/archive/$_lpeglabel_commit.tar.gz
+ https://github.com/actboy168/luamake/archive/$_luamake_commit.tar.gz
+ https://github.com/actboy168/bee.lua/archive/$_luamake_bee_lua_commit.tar.gz"
+checksum="b1cad396f391f337f5ab23e7b5c7ffa644e763119b45b5285c94acff55cc7fb7
+ d0199372ce6c27664ec4f4bdef270516a414a5e5ff37fe78d72ef16bab82616d
+ 91271f29fab1e8780c41daf9ec6616b5ba2fa43f44caf1ce38b056893dd5e0ca
+ 4510fcea886ffdde9f5db8bbd6e4c3af809164227ecc0410169b0a28222e10d8
+ f80b35d8ca59416480ee2496a4f02671ecb44d2642cf3fa4a0e5942f1916bde2
+ 435f45ce34f23bf1aef92507e70be8a2ba0b671462ae26ab3f825e4e78cacf15
+ 6bda82469006b2d194863f5ed1180a07a8cbdf781854407c872e2f1a80c940fa
+ 6d104b4602d4cbcec09742154018d1be99d3a7d653b81b08b7c3d0542b605a64"
+
+_emmy_lua_code_style_dir="EmmyLuaCodeStyle"
+_bee_lua_dir="bee.lua"
+_love_api_dir="love-api"
+_lovr_docs_dir="lovr-docs"
+_lpeglabel_dir="lpeglabel"
+_luamake_dir="luamake"
+
+_pkgdir="$pkgname-$version"
+
+pre_build() {
+	rm -rf "$_pkgdir/3rd/"*
+
+	for name in emmy_lua_code_style bee_lua love_api lovr_docs lpeglabel luamake
+	do
+		local srcname="_${name}_commit"
+		local dstname="_${name}_dir"
+		local modname="${!dstname}"
+
+		local submod_src="$modname-${!srcname}"
+		local submod_dst="$_pkgdir/3rd/$modname"
+		cp --recursive "$submod_src" "$submod_dst"
+	done
+
+	# Now we need to copy luamake's dependencies, which luckily is just bee.lua (again, but
+	# different version).
+	local luamake_3rd="$_pkgdir/3rd/luamake/3rd"
+	rm -rf "$luamake_3rd"/*
+	cp --recursive "$_bee_lua_dir-$_luamake_bee_lua_commit" "$luamake_3rd/$_bee_lua_dir"
+}
+
+do_build() {
+	cd "$_pkgdir"
+	ninja -C 3rd/luamake -f compile/ninja/linux.ninja
+	./3rd/luamake/luamake rebuild
+}
+
+do_install() {
+	cd "$_pkgdir"
+
+	# main script
+	local libpath="usr/lib/$pkgname"
+	vmkdir "$libpath/bin"
+	vcopy "bin/*" "$libpath/bin"
+
+	# entrypoint and files
+	for script in main.lua debugger.lua locale script meta; do
+		vcopy "$script" "$libpath"
+	done
+
+	# Install wrapper script as the binary.
+	vmkdir usr/bin
+	sed ${FILESDIR}/wrapper --expression "s;@PKGNAME@;$pkgname;g" > "$pkgname-wrapper"
+	vbin "$pkgname-wrapper" "$pkgname"
+}
+
+post_install() {
+	vlicense "$_pkgdir/LICENSE"
+}

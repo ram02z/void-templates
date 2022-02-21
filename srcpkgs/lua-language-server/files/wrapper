@@ -1,0 +1,6 @@
+#!/bin/sh
+TMPPATH=$(mktemp -d "/tmp/@PKGNAME@.XXXX)")
+DEFAULT_LOGPATH="$TMPPATH/log"
+DEFAULT_METAPATH="$TMPPATH/meta"
+
+exec /usr/lib/@PKGNAME@/bin/@PKGNAME@ --logpath="$DEFAULT_LOGPATH" --metapath="$DEFAULT_METAPATH" "$@"
