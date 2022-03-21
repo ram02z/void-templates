@@ -34,3 +34,4 @@ libuv-devel_package() {
 		vmove "usr/lib/*.so"
 	}
 }
+
