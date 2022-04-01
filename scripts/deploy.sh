@@ -13,10 +13,6 @@ URL="https://${GHIO}/${REPONAME}"
 TARGET_BRANCH="gh-pages"
 EMAIL="omarzeghouanii@gmail.com"
 BUILD_DIR="void-packages/hostdir/binpkgs"
-case "$ARCH" in
-    *musl* ) LIBC="musl" ;;
-    * ) LIBC="glibc" ;;
-esac
 
 echo "### Started deploy to $GITHUB_REPOSITORY/$TARGET_BRANCH"
 
