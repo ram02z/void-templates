@@ -1,6 +1,6 @@
 # Template file for 'rofi-wayland'
 pkgname=rofi-wayland
-version=1.7.2
+version=1.7.3
 revision=1
 _ver=${version}+wayland1
 wrksrc=rofi-${_ver}
@@ -15,7 +15,7 @@ maintainer="Omar Zeghouani <omarzeghouanii@gmail.com>"
 license="MIT"
 homepage="https://github.com/lbonn/rofi"
 distfiles="https://github.com/lbonn/rofi/releases/download/${_ver}/rofi-${_ver}.tar.gz"
-checksum=13c9ac16e9940f72e952d65fdaaa41b0fcbd8da483119a9f6b9bea5940ff2118
+checksum=31d912f63403c6db9561f140a2a0e5673390a0fc75ad0be80b45e76b625bf37c
 replaces="rofi>=0"
 
 post_install() {
