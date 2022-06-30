@@ -1,5 +1,8 @@
 #!/bin/bash
 
+# NOTE: temporary fix
+git config --global --add safe.directory '*'
+
 tip=$(git rev-parse HEAD)
 base=$(git rev-parse HEAD~)
 
