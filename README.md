@@ -2,9 +2,8 @@ A collection of templates for Void Linux, to be used with xbps-src.
 
 | Package             | Status              |
 | ------------------- | ----------------    |
-| lua-language-server | From @gbrlsnchs repo|
 | ncspot              | PR in progress      |
-| rofi-wayland        | PR in progress      |
+| rofi-wayland        | Upstream PR closed  |
 | swayr               | PR in progress      |
 | swaywsr             | Waiting on upstream |
 | battop              | Applied patches     |
