@@ -11,7 +11,8 @@ OWNER="ram02z"
 GHIO="${OWNER}.github.io"
 URL="https://${GHIO}/${REPONAME}"
 TARGET_BRANCH="gh-pages"
-EMAIL="omarzeghouanii@gmail.com"
+USER_NAME="github-actions[bot]"
+EMAIL="github-actions[bot]@users.noreply.github.com"
 BUILD_DIR="void-packages/hostdir/binpkgs"
 
 echo "### Started deploy to $GITHUB_REPOSITORY/$TARGET_BRANCH"
@@ -26,7 +27,7 @@ fi
 # Create or clone the gh-pages repo
 mkdir -p $HOME/branch/
 cd $HOME/branch/
-git config --global user.name "$GITHUB_ACTOR"
+git config --global user.name "$USER_NAME"
 git config --global user.email "$EMAIL"
 
 if [ -z "$(git ls-remote --heads https://${GITHUB_ACTOR}:${GITHUB_TOKEN}@github.com/${GITHUB_REPOSITORY}.git ${TARGET_BRANCH})" ]; then
